@@ -1,0 +1,37 @@
+.sec1 {
+    position: absolute;
+    bottom: -12vh;
+    width: 100%;
+    padding: 0 1rem;
+    left: 0;
+}
+
+.section_title{
+padding: 1rem .3rem;
+font-size: 20px;
+font-weight: 600;
+}
+
+.movie_row {
+    border: solid .5px #ffffff36;
+    width: 100%;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px #ffffff30;
+    overflow: hidden;
+}
+
+.scroll_container{
+    margin: 0 15px;
+    padding: 15px 0 20px 0;
+    border-radius: 1rem;
+    display: flex;
+    gap: 20px;
+    overflow: scroll hidden;
+    color: #fff;
+}
+
+.scroll_container::-webkit-scrollbar-thumb {
+        border-top: solid .5px #ffffff36;
+        cursor: pointer;
+}

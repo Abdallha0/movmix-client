@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+async function getLocationDetails() {
+    try {
+        const res = await fetch("https://ipwho.is/");
+        if(!res.ok){
+            return {
+                message: "wrong when sending request to ip"
+            }
+        }
+        const data = await res.json();
+        console.log(data)
+        return data
+    } catch (error) {
+        return {
+            message: "wrong when trying to get location data",
+            status: false,
+        }
+    }
+}
+getLocationDetails()
+    </script>
+</body>
+</html>

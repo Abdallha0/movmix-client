@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* colors */
+  --background: #171717;
+  --foreground: #fff;
+  --brand-color: #d20303;
+  --links-color: #0084ff;
+  /* fonts */
+  --brand-font: Metal Mania;
 }
 
 @theme inline {
@@ -12,15 +17,172 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ededed;
+    --foreground: #0a0a0a;
   }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-width: 100vw;
+  overflow-x: hidden;
+  height: 100vh;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+input {
+  border: 0;
+  outline: none;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.click-effect:active {
+  transform: scale(.9);
+}
+
+/* ============= Global style classes ==================== */
+.layout {
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  color: var(--brand-color);
+  font-family: var(--brand-font);
+  cursor: default;
+}
+
+
+/* ================ loader ================= */
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--brand-color);
+  border-bottom-color: var(--background);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ------------------------- toast ---------------------------- */
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-transform: capitalize;
+  z-index: 9999;
+}
+
+.toast {
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  opacity: 0.95;
+  backdrop-filter: blur(30px);
+}
+
+.toast-success {
+  border-left: 5px solid green;
+  color: green;
+}
+
+.toast-error {
+  border-left: 5px solid red;
+  color: red;
+}
+
+.toast-info {
+
+  border-left: 5px solid #3b82f6;
+  color: #3b82f6;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =============== global animations =============== */
+
+@keyframes zoom-in-out {
+  0%{
+    scale: .9;
+  }50%{
+    scale: 1;
+  }100%{
+    scale: .9;
+  }
 }

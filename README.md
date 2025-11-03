@@ -34,3 +34,45 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Folders Structure 
+
+frontend/
+├── app/                    # App Router directory
+│   ├── (auth)/            # Route groups
+│   ├── (dashboard)/
+│   ├── (marketing)/
+│   ├── api/               # API routes
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # First page
+│   └── style.css          # First page styles
+├── components/            # Reusable components
+│   ├── ui/                # Basic UI components
+│   ├── forms/             # Form components
+│   |     ├── test.tsx
+│   |    └── css/
+|   |         └── style.css 
+│   └── layout/            # Layout components
+│        ├── test.tsx
+│        └── style.css           
+├── lib/                  # Utility libraries
+├── hooks/                # Custom React hooks
+├── utils/                # Utility functions
+├── types/                # TypeScript type definitions
+├── constants/            # App constants
+├── middleware.ts         # Next.js middleware
+├── public/               # Static assets
+└── package.json
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. authentication routes 
+
+login route ==> /login
+signup route ==> /register
+reset-password route ==> /forgot-password
+verify email route ==> /verify-email/:token
+
+

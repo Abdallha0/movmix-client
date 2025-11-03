@@ -1,0 +1,136 @@
+.welcome_page {
+    position: relative;
+}
+
+.welcome_page .content {
+    position: fixed;
+    top: 0;
+    left: 160px;
+    width: calc(100% - 160px * 2);
+    height: 100%;
+    background: url(@/public/login-form.jpg) center;
+    background-size: 100% 100%;
+}
+
+.welcome_page aside {
+    width: 20%;
+    width: 160px;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+}
+
+.welcome_page .poster_container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    flex-direction: column;
+    animation: autoScroll 75s linear infinite;
+}
+
+.welcome_page .poster_container::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: var(--background);
+    opacity: .4;
+    box-shadow: 0 0 10px inset rgba(255, 255, 255, 0.774);
+}
+
+@keyframes autoScroll {
+    0% {}
+
+    100% {
+        transform: translateY(-85%);
+    }
+}
+
+.welcome_page .left {
+    left: 0;
+}
+
+.welcome_page .right {
+    right: 0;
+}
+
+.welcome_page .poster {
+    width: calc(100% - 10px);
+    height: 160px;
+    border-radius: 10px;
+}
+
+.welcome_page .poster img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.welcome_page .sec1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: #000000a2;
+    backdrop-filter: blur(3px);
+    text-align: center;
+}
+
+.welcome_page .sec1_title {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 700;
+    text-transform: capitalize;
+    height: 40%;
+}
+
+.welcome_page .sec1_title h1 {
+    font-size: 30px;
+
+}
+
+.welcome_page .para {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 1rem;
+}
+
+.welcome_page .para p {
+    width: 370px;
+    word-wrap: break-word;
+
+}
+
+.welcome_page .started_btn {
+    padding: .8rem 1.6rem;
+    background: linear-gradient(45deg, red, var(--brand-color), #9b0000);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #9b0000;
+    margin-top: 3rem;
+    animation: zoom-in-out 4s ease-in-out infinite;
+}
+
+@media (max-width: 700px) {
+    .welcome_page aside {
+        display: none;
+    }
+
+    .welcome_page .content {
+        width: 100%;
+        left: 0;
+    }
+}
