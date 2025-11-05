@@ -11,8 +11,17 @@
     background: linear-gradient(135deg, #202020 0%, #202020 100%);
 }
 
-.movie_card:hover, .active_movie {
-    transform: scale(1.05);
+.add_to_list_btn{
+color: #ffffff;
+    position: absolute;
+    bottom: 3px;
+    padding: 5px;
+    background: #20202061;
+    right: 10px;
+    border-radius: 50%;
+            opacity: 0;
+    z-index: 9999;
+        display: none;
 }
 
 .movie_card img {
@@ -34,11 +43,17 @@ width: 100%;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-.movie_card:hover .movie_info {
+.movie_card:hover .movie_info{
 display: block;
         opacity: 1;
                 transition: 0.3s;
 }
+
+.movie_card:hover .add_to_list_btn{
+display: block;
+        opacity: 1;
+}
+
 
 .movie_title {
     font-size: 14px;

@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-async function getLocationDetails() {
-    try {
-        const res = await fetch("https://ipwho.is/");
-        if(!res.ok){
-            return {
-                message: "wrong when sending request to ip"
-            }
-        }
-        const data = await res.json();
-        console.log(data)
-        return data
-    } catch (error) {
-        return {
-            message: "wrong when trying to get location data",
-            status: false,
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/app/globals.css">
+  <title>Document</title>
+
+  <style>
+    .vedio-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 60vh;
+      background-color: #000000;
+      border-left: solid var(--brand-color) 0.5px;
+      border-right: solid var(--brand-color) 0.5px;
+      backdrop-filter: blur(5px);
+      padding: 1rem;
     }
-}
-getLocationDetails()
-    </script>
+
+    .vedio-container iframe{
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="vedio-container">
+  <iframe width="0" height="0" src="https://www.youtube.com/embed/h3mpiTwYKX8" title="العبودية | الدحيح " frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  
+  </div>
+<!--  -->
 </body>
+
 </html>
