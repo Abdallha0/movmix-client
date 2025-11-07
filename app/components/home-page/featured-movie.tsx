@@ -1,17 +1,23 @@
-"use client"
+"use client";
 import { Plus } from "lucide-react";
 import PlayFill from "../icons/play-fill";
 import styles from "./css/featured.module.css"
 import { useToast } from "@/app/providers/toastProvider";
-import { getMovieTrailer } from "@/app/api/movies/movies-api-utils";
-function Featured({ id, title, activeTab, overview, img, setVedio }: { id: string | number, setVedio: (p: { call: boolean, title: string, url: string }) => void, activeTab: "info" | "trailer" | "reviews"; img: string; title: string, overview: string }) {
-    const { showToast } = useToast()
+import { getMoviesReviews, getMovieTrailer } from "@/app/api/movies/movies-api-utils";
+import { useState } from "react";
+import Reviews from "./reviews";
+
+function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call: boolean, title: string, url: string }, id: string | number, setVedio: (p: { call: boolean, title: string, url: string }) => void, img: string; title: string, overview: string }) {
+    const { showToast } = useToast();
+    const [reviews, setReviews] = useState<any>({ call: false, data: [] });
+    const [activeTab, setActiveTab] = useState<"info" | "trailer" | "reviews">("info")
+
     async function getTrailer() {
-        setVedio({
-            call: false,
-            title: "",
-            url: ""
-        })
+
+        if (vedio.call || vedio.url) {
+            return;
+        }
+
         const res = await getMovieTrailer(id, 2);
         if (!res?.status) {
             showToast(res?.message as string, "error");
@@ -22,26 +28,50 @@ function Featured({ id, title, activeTab, overview, img, setVedio }: { id: strin
             call: res?.status as boolean,
             title: res.data?.title as string,
             url: res.data?.url as string,
-        })
+        });
+        setActiveTab("trailer")
 
     }
 
+    async function getReviews() {
+        if (reviews.length <= 0 || reviews.call) {
+            return;
+        }
+
+        const res = await getMoviesReviews(id, 1);
+        if (!res?.status) {
+            showToast(res.message as string, "error");
+            return;
+        }
+
+        setReviews({ call: true, data: res?.data || [] });
+                setActiveTab("reviews")
+    }
+    
+    function getInfo(){
+    setActiveTab("info");
+    setReviews((prev) => ({ call: false, data: prev?.data })) 
+    setVedio((prev) => ({ call: false, url: prev.url, title: prev.title })) 
+    }
 
     return (
-        <div className={styles.featured} style={{ backgroundImage: `url(${img})` }}>
-            <div className={styles.featured_content}>
-                <h2 className={styles.featured_title}>{title}</h2>
-                <p className={styles.featured_description}>{overview}</p>
-                <div className={styles.featured_tabs}>
-                    <button className={`${styles.featured_tab} ${activeTab === "info" ? styles.active : ""}`}>Informations</button>
-                    <button className={`${styles.featured_tab} ${activeTab === "trailer" ? styles.active : ""}`} onClick={getTrailer}>Trailer</button>
-                    <button className={`${styles.featured_tab} ${activeTab === "reviews" ? styles.active : ""}`}>Reviews</button>
-                </div>
-                <div className="hero-buttons">
-                    <button className="btn btn-primary"><PlayFill size={20} color="white" /> Watch</button>
-                    <button className="btn btn-secondary"><Plus /> MY LIST</button>
+        <div>
+            <div className={styles.featured} style={{ backgroundImage: `url(${img})` }}>
+                <div className={styles.featured_content}>
+                    <h2 className={styles.featured_title}>{title}</h2>
+                    <p className={styles.featured_description}>{overview}</p>
+                    <div className={styles.featured_tabs}>
+                        <button className={`${styles.featured_tab} ${activeTab === "info" ? styles.active : ""}`} onClick={getInfo} >Informations</button>
+                        <button className={`${styles.featured_tab} ${activeTab === "trailer" ? styles.active : ""}`} onClick={getTrailer}>Trailer</button>
+                        <button className={`${styles.featured_tab} ${activeTab === "reviews" ? styles.active : ""}`} onClick={getReviews}>Reviews</button>
+                    </div>
+                    <div className="hero-buttons">
+                        <button className="btn btn-primary"><PlayFill size={20} color="white" /> Watch</button>
+                        <button className="btn btn-secondary"><Plus /> MY LIST</button>
+                    </div>
                 </div>
             </div>
+            {reviews.call && <Reviews reviews={reviews.data} img={img} />}
         </div>
     )
 }

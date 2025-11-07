@@ -53,7 +53,7 @@ function MovieGrid({ activeItem, activeGerne }: { activeItem: "Trending" | "Popu
             {
                 data.length >= 1 ?
                     data.map((item, i) => (
-                        <MovieCard img={item.poster} key={item.id || i} ratting={item.ratting} title={item.title} year={item.year} />
+                        <MovieCard id={item?.tmdb} img={item.poster} key={item.tmdb || i} ratting={item.ratting} title={item.title} year={item.year} />
                     )) : <div className="not-found">No movies found for this category.</div>
             }
         </div>

@@ -2,7 +2,7 @@ import StarFill from "../icons/star-fill";
 import styles from "./css/movie-card.module.css";
 import { HeartPlus } from "lucide-react"
 
-function MovieCard({ isActive, title, ratting, year, img }: { isActive?: boolean, title: string, ratting: number, year: number, img: string, }) {
+function MovieCard({ isActive, title, ratting, year, img, id }: { id: string | number, isActive?: boolean, title: string, ratting: number, year: number, img: string, }) {
     return (
         <div className={styles.movie_card} style={{ background: `url(${img || ""}) center no-repeat` }}>
             {!img && <div className={styles.card_layout}></div>}
@@ -13,7 +13,7 @@ function MovieCard({ isActive, title, ratting, year, img }: { isActive?: boolean
                     <span>{year || ""}</span>
                 </div>
             </div>
-                            <button className={styles.add_to_list_btn}> <HeartPlus size={16} /> </button>
+                            <button className={styles.add_to_list_btn}> <HeartPlus size={16} /> {id} </button>
         </div>
     )
 }

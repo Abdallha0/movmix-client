@@ -12,7 +12,7 @@ function SlideSection({ data }: { data: Array<object> }) {
                     {
                         data.length >= 1 ?
                             data.map((item: any, i) => (
-                                <MovieCard title={item?.title} img={item?.poster} ratting={item?.ratting} year={item?.year} key={item?.id || i} />
+                                <MovieCard id={item?.tmdb} title={item?.title} img={item?.poster} ratting={item?.ratting} year={item?.year} key={item?.tmdb || i} />
                             )) : <div className="not-found"> can not found any movies at here </div>
                     }
                 </div>

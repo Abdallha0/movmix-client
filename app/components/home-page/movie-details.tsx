@@ -5,9 +5,9 @@ import StarFill from "../icons/star-fill"
 import { getMovieTrailer } from "@/app/api/movies/movies-api-utils";
 import { useToast } from "@/app/providers/toastProvider";
 
-function MovieDetails({ setIsLoading, setVedio, id, title, overview, ratting }:
+function MovieDetails({ setVedio, id, title, overview, ratting }:
     {
-        setVedio: (p: { call: boolean, title: string, url: string }) => void, title: string, overview: string, ratting: number
+        setVedio: (p: { call: boolean, title: string, url: string }) => void, id: string | number, title: string, overview: string, ratting: number
     }) {
     const { showToast } = useToast()
     async function getTrailer() {

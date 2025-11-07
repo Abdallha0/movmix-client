@@ -28,7 +28,7 @@ function Home() {
     url: "",
     call: false,
   })
-  
+
   useEffect(() => {
     async function fetchData() {
       const res = await nowPlay(1, true, 1, true);
@@ -79,7 +79,7 @@ function Home() {
       <Sidebar active="home" name="Abdallha Mohamed" />
       <section className={styles.hero} style={{ backgroundImage: ` linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
         <Search animation="fade-right" />
-        <MovieDetails  setVedio={setVedio} id={data[activeI]?.tmdb} title={data[activeI]?.title} ratting={data[activeI]?.ratting} overview={data[activeI]?.overview} />
+        <MovieDetails setVedio={setVedio} id={data[activeI]?.tmdb} title={data[activeI]?.title} ratting={data[activeI]?.ratting} overview={data[activeI]?.overview} />
         <SlideSection data={data} />
       </section>
 
@@ -90,7 +90,7 @@ function Home() {
       </section>
 
       <section className="section">
-        <Featured activeTab="info" setVedio={setVedio} id={data[3]?.tmdb} img={data[3].backdrop} title={data[3].title} overview={data[3].title} />
+        <Featured vedio={vedio} setVedio={setVedio} id={data[1]?.tmdb} img={data[1]?.backdrop} title={data[1]?.title} overview={data[1]?.overview} />
       </section>
       {vedio.call && <Vedio title={vedio.title} setVedio={setVedio} url={vedio.url} />}
     </div>
