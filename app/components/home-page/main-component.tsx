@@ -27,7 +27,7 @@ function Home() {
     title: "",
     url: "",
     call: false,
-  })
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -77,7 +77,7 @@ function Home() {
     <div className="home-page">
       <Header name="Abdallha M" photo={null} />
       <Sidebar active="home" name="Abdallha Mohamed" />
-      <section className={styles.hero} style={{ backgroundImage: ` linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
+      <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
         <Search animation="fade-right" />
         <MovieDetails setVedio={setVedio} id={data[activeI]?.tmdb} title={data[activeI]?.title} ratting={data[activeI]?.ratting} overview={data[activeI]?.overview} />
         <SlideSection data={data} />

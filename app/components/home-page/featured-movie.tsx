@@ -4,10 +4,10 @@ import PlayFill from "../icons/play-fill";
 import styles from "./css/featured.module.css"
 import { useToast } from "@/app/providers/toastProvider";
 import { getMoviesReviews, getMovieTrailer } from "@/app/api/movies/movies-api-utils";
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import Reviews from "./reviews";
 
-function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call: boolean, title: string, url: string }, id: string | number, setVedio: (p: { call: boolean, title: string, url: string }) => void, img: string; title: string, overview: string }) {
+function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call: boolean, title: string, url: string }, id: string | number, setVedio: Dispatch<SetStateAction<{ call: boolean; title: string; url: string }>>, img: string; title: string, overview: string }) {
     const { showToast } = useToast();
     const [reviews, setReviews] = useState<any>({ call: false, data: [] });
     const [activeTab, setActiveTab] = useState<"info" | "trailer" | "reviews">("info")
@@ -15,6 +15,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
     async function getTrailer() {
 
         if (vedio.call || vedio.url) {
+        console.log("vedio is here")
             return;
         }
 
@@ -35,23 +36,23 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
 
     async function getReviews() {
         if (reviews.length <= 0 || reviews.call) {
+                setActiveTab("reviews")
             return;
         }
 
         const res = await getMoviesReviews(id, 1);
         if (!res?.status) {
-            showToast(res.message as string, "error");
+            showToast(res?.message as string, "error");
             return;
         }
 
         setReviews({ call: true, data: res?.data || [] });
-                setActiveTab("reviews")
+        setActiveTab("reviews")
     }
-    
-    function getInfo(){
-    setActiveTab("info");
-    setReviews((prev) => ({ call: false, data: prev?.data })) 
-    setVedio((prev) => ({ call: false, url: prev.url, title: prev.title })) 
+
+    function getInfo() {
+        setActiveTab("info");
+        setReviews((prev: any) => ({ call: false, ...prev }))
     }
 
     return (
@@ -71,7 +72,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
                     </div>
                 </div>
             </div>
-            {reviews.call && <Reviews reviews={reviews.data} img={img} />}
+            {(reviews.call && activeTab === "reviews") && <Reviews reviews={reviews.data} />}
         </div>
     )
 }

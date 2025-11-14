@@ -1,0 +1,113 @@
+        .card {
+            width: 250px;
+            border-radius: 20px;
+            background: linear-gradient(#440101, rgb(153, 0, 0));
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:active {
+            transform: scale(.9);
+        }
+
+        .card img {
+            height: 150px;
+            width: 100%;
+            display: flex;
+            object-fit: fill;
+            flex-direction: column;
+            background: var(--background);
+            position: relative;
+            box-shadow: 0 0 10px #ac000098;
+        }
+
+        .bottom_section {
+            margin-top: 15px;
+            padding: 10px 5px;
+        }
+
+        .title {
+            display: block;
+            font-size: 17px;
+            font-weight: bolder;
+            color: white;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .item {
+            flex: 30%;
+            text-align: center;
+            padding: 5px;
+            color: rgb(255, 255, 255);
+        }
+
+        .big_text {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .3px;
+            display: block;
+        }
+
+        .regular_text {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .item:nth-child(2) {
+            border-left: 1px solid rgba(255, 255, 255, 0.126);
+            border-right: 1px solid rgba(255, 255, 255, 0.126);
+        }
+
+        .overview {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .rating_contaienr {
+            position: absolute;
+            top: 125px;
+            right: .3rem;
+        }
+
+        .rating_wrapper {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background);
+            border-radius: 50%;
+        }
+
+        .rating_text {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .progress_ring__bg {
+            fill: none;
+            stroke: transparent;
+            stroke-width: 4;
+        }
+
+        .progress_ring__progress {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 125.6;
+            transform: rotate(-20deg);
+            transform-origin: 50% 50%;
+        }

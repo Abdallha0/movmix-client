@@ -1,6 +1,7 @@
 import StarFill from "../icons/star-fill";
-import styles from "./css/featured.module.css"
-function Reviews({ reviews, img }: { reviews: Array<any>, img:string }) {
+import styles from "./css/featured.module.css";
+import profile from "@/public/profile.png"
+function Reviews({ reviews }: { reviews: Array<any>}) {
 
     function formatTime(t: string) {
         let now = new Date().toISOString();
@@ -35,7 +36,7 @@ function Reviews({ reviews, img }: { reviews: Array<any>, img:string }) {
                     reviews.map((item, i) => (
                         <li key={item.id || i}>
                             <div className={styles.review_header}>
-                                <img src={item.author_details.avatar_path || img} alt="" />
+                                <img src={item.author_details.avatar_path || profile} alt="" />
                                 <span>{item.author || item.author_details.userName || item.author_details.name || ""}</span>
                             </div>
                             <div className={styles.review_body}>{item.content}</div>
