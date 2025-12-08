@@ -4,6 +4,7 @@ import styles from "./css/hero.module.css"
 import StarFill from "../icons/star-fill"
 import { getMovieTrailer } from "@/app/api/movies/movies-api-utils";
 import { useToast } from "@/app/providers/toastProvider";
+import Link from "next/link";
 
 function MovieDetails({ setVedio, id, title, overview, ratting }:
     {
@@ -45,7 +46,9 @@ function MovieDetails({ setVedio, id, title, overview, ratting }:
                 }
             </div>
             <div className="hero-buttons" data-aos="zoom-in">
-                <button className=" btn btn-primary"> <PlayFill size={20} color="white" /> Watch Now</button>
+                <Link href={`/stream/${id}/${title.split(" ").join("-")}`}>
+                    <button className=" btn btn-primary"> <PlayFill size={20} color="white" /> Watch Now</button>
+                </Link>
                 <button className="btn btn-secondary" onClick={getTrailer}>Trailer</button>
             </div>
         </div>

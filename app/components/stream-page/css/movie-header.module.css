@@ -1,0 +1,255 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(13, 13, 20, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(47, 47, 63, 0.5);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    height: 5rem;
+  }
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.025em;
+}
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: var(--foreground);
+}
+
+.navLinkActive {
+  font-size: 0.875rem;
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .rightSection {
+    gap: 1rem;
+  }
+}
+
+.searchWrapper {
+  display: none;
+  align-items: center;
+}
+
+.searchWrapper.searchOpen {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .searchWrapper {
+    display: flex;
+  }
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+}
+
+.searchInput {
+  padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+  width: 12rem;
+  background-color: var(--secondary);
+  border: 1px solid rgba(47, 47, 63, 0.5);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchInput::placeholder {
+  color: var(--muted-foreground);
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+}
+
+@media (min-width: 1024px) {
+  .searchInput {
+    width: 16rem;
+  }
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius);
+  color: var(--foreground);
+  transition: background-color 0.2s;
+}
+
+.iconButton:hover {
+  background-color: var(--secondary);
+}
+
+@media (min-width: 1024px) {
+  .iconButton {
+    display: none;
+  }
+}
+
+.iconButtonDesktop {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius);
+  color: var(--foreground);
+  transition: background-color 0.2s;
+}
+
+.iconButtonDesktop:hover {
+  background-color: var(--secondary);
+}
+
+@media (min-width: 1024px) {
+  .iconButtonDesktop {
+    display: flex;
+  }
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius);
+  color: var(--foreground);
+  transition: background-color 0.2s;
+}
+
+.menuButton:hover {
+  background-color: var(--secondary);
+}
+
+@media (min-width: 1024px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(47, 47, 63, 0.5);
+}
+
+@media (min-width: 1024px) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+.mobileNavLink {
+  padding: 0.5rem 1rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius);
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.mobileNavLink:hover {
+  color: var(--foreground);
+  background-color: var(--secondary);
+}
+
+.mobileNavLinkActive {
+  padding: 0.5rem 1rem;
+  color: var(--foreground);
+  font-weight: 500;
+  background-color: var(--secondary);
+  border-radius: var(--radius);
+}
+
+.animateSlideIn {
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

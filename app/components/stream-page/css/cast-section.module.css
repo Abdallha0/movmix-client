@@ -1,0 +1,121 @@
+.section {
+  padding: 2rem 0;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.scrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--foreground);
+  background: transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.scrollButton:hover {
+  background-color: var(--secondary);
+  border-color: var(--muted-foreground);
+}
+
+.scrollContainer {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin: 0 -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.castCard {
+  flex-shrink: 0;
+  width: 9rem;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .castCard {
+    width: 11rem;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  aspect-ratio: 3 / 4;
+}
+
+.castImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.castCard:hover .castImage {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 13, 20, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.castCard:hover .imageOverlay {
+  opacity: 1;
+}
+
+.castName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.castRole {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

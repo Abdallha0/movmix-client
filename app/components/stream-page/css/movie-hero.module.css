@@ -1,0 +1,267 @@
+.hero {
+  position: relative;
+  height: 85vh;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    height: 90vh;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.backdropImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gradientTop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--background) 0%, rgba(13, 13, 20, 0.6) 40%, transparent 100%);
+}
+
+.gradientLeft {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--background) 0%, transparent 50%);
+}
+
+.content {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding: 0 2rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.info {
+  max-width: 42rem;
+}
+
+@media (min-width: 1024px) {
+  .info {
+    max-width: 48rem;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.badgePrimary {
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+
+.badgeOutline {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+
+.badgeOutline:nth-child(3) {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 4.5rem;
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+}
+
+.match {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.rating {
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--muted-foreground);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.stars {
+  color: gold;
+}
+
+.description {
+  font-size: 1rem;
+  color: rgba(248, 248, 248, 0.8);
+  margin-bottom: 1.5rem;
+  max-width: 36rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .description {
+    font-size: 1.125rem;
+    -webkit-line-clamp: unset;
+  }
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.genre {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.genre:hover {
+  color: var(--foreground);
+}
+
+.genreDot {
+  margin-left: 0.5rem;
+  color: var(--border);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.playButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  transition: background-color 0.2s;
+}
+
+.playButton:hover {
+  background-color: rgba(201, 76, 76, 0.9);
+}
+
+.listButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  transition: background-color 0.2s;
+}
+
+.listButton:hover {
+  background-color: var(--muted);
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--foreground);
+  background: transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.iconButton:hover {
+  background-color: var(--secondary);
+  border-color: var(--muted-foreground);
+}
+
+.muteButton {
+  position: absolute;
+  bottom: 4rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--foreground);
+  background: transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.muteButton:hover {
+  background-color: var(--secondary);
+  border-color: var(--muted-foreground);
+}
+
+@media (min-width: 1024px) {
+  .muteButton {
+    bottom: 6rem;
+    right: 2rem;
+  }
+}

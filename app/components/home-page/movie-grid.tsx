@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MovieCard from "../cards/movie-card";
 import { newMovies, popular, topMovies, trending } from "@/app/api/movies/tmdb";
 import { useToast } from "@/app/providers/toastProvider";
+import Link from "next/link";
 
 function MovieGrid({ activeItem, activeGerne }: { activeItem: "Trending" | "Popular" | "Recently added" | "Top Movies", activeGerne: "Action" | "Abenteuer" | "Animation" | "Romance" | "Horror" | "Comedy" }) {
     const [data, setData] = useState<any[]>([]);
@@ -29,7 +30,7 @@ function MovieGrid({ activeItem, activeGerne }: { activeItem: "Trending" | "Popu
                     res = await topMovies(2, false, 1, null, activeGerne, false);
                     break;
                 default:
-                    res = await trending("week", 1, 1, false, activeGerne );
+                    res = await trending("week", 1, 1, false, activeGerne);
                     break;
             }
 
@@ -53,7 +54,9 @@ function MovieGrid({ activeItem, activeGerne }: { activeItem: "Trending" | "Popu
             {
                 data.length >= 1 ?
                     data.map((item, i) => (
-                        <MovieCard id={item?.tmdb} img={item.poster} key={item.tmdb || i} ratting={item.ratting} title={item.title} year={item.year} />
+                        <Link key={item.tmdb || i} href={`/stream/${item.tmdb}/${item.title.split(" ").join("-")}`}>
+                            <MovieCard id={item?.tmdb} img={item.poster} ratting={item.ratting} title={item.title} year={item.year} />
+                        </Link>
                     )) : <div className="not-found">No movies found for this category.</div>
             }
         </div>

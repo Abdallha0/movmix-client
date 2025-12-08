@@ -6,7 +6,7 @@ import { FormEvent, useEffect, useState } from "react"
 import loginValidator from "./utils/login-validators"
 import login from "@/app/api/login"
 import { useToast } from "@/app/providers/toastProvider"
-import { setToken } from "@/app/utils/cookieUtils"
+import { setToken, setUserName } from "@/app/utils/cookieUtils"
 import { useRouter } from "next/navigation"
 import { signIn } from 'next-auth/react';
 import AOS from "aos";
@@ -14,7 +14,7 @@ import "aos/dist/aos.css";
 
 function Login() {
 
-    useEffect(() => {AOS.init({ duration: 800, once: true})},[]);
+    useEffect(() => { AOS.init({ duration: 800, once: true }) }, []);
 
     const [loading, setLoading] = useState(false);
     const [showPass, setShowPass] = useState(false);
@@ -55,6 +55,7 @@ function Login() {
         }
 
         setToken(res?.data.token);
+        setUserName(res.data.name || "");
         router.push("/home")
     }
 

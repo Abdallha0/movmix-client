@@ -3,7 +3,7 @@ import { CircleUserRound } from "lucide-react"
 import Link from "next/link"
 import styles from "./css/header.module.css"
 
-function Header({ name, photo }: { name: string, photo: string | null | undefined | "" }) {
+function Header({ name, photo }: { name: string, photo: string }) {
     return (
         <header className={styles.header} data-aos="fade-down">
             <nav className={styles.nav}>
@@ -15,13 +15,13 @@ function Header({ name, photo }: { name: string, photo: string | null | undefine
                     <li className={styles.nav_link}><Link href={`${location.pathname}/cartoons`}>Cartoons</Link></li>
                 </ul>
             </nav>
-            <div className={styles.user_section}>
+            {name !== "GUEST" ? (<div className={styles.user_section}>
                 <span>{name}</span>
                 <div className={styles.user_avatar}
-                    style={photo ? { background: `url(${photo}) center` } : { background: "transparent" }}>
+                    style={photo ? { backgroundImage: `url(${photo})` } : { background: "transparent" }}>
                     {!photo && <CircleUserRound />}
                 </div>
-            </div>
+            </div>) : (<Link href="/login"><button>Log in</button></Link>) }
         </header>
     )
 }

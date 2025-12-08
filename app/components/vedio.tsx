@@ -8,8 +8,8 @@ function Vedio({ url, title, setVedio }: { url: string, title: string, setVedio:
             </button>
         </div>
         <iframe width="0" height="0" src={url} title={title} frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin" allowFullScreen={true}></iframe>
+            allow=""
+            referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
     </div>
 }
 

@@ -1,11 +1,8 @@
-import SearchContaienr from "../components/search/search-contaienr";
-
+import { MovieSearchPage } from "../components/search/movie-search"
+import "./search-page.css"
 function page() {
-    return (
-    <>
-    <SearchContaienr />
-    </>
-    )
+    return <MovieSearchPage />
+
 }
 
 export default page

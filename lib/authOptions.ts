@@ -2,7 +2,6 @@ import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import registering from "@/app/api/registering";
-import { setToken } from "@/app/utils/cookieUtils";
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -29,21 +28,20 @@ export const authOptions: AuthOptions = {
         secret: process.env.NEXTAUTH_SECRET!,
         maxAge: 60 * 60 * 24 * 7, // 7 days
     },
+
     callbacks: {
         async jwt({ token, account, user }) {
             if (account && user) {
                 // call registeration function
                 const data = await registering(user.name as string, user.email as string, "", account.provider as "google" | "facebook", account.providerAccountId as string);
                 if (data?.data.token) {
-                    token.accessToken = data.data.token
-                    setToken(data.data.token)
+                    token.accessToken = data.data.token;
                 }
-
             }
             return token
         },
 
-        session({ session, token }) {
+        session({ session, token }: { session: any, token: any }) {
             session.backendToken = token.accessToken;
             return session
         },

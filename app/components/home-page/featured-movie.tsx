@@ -6,6 +6,7 @@ import { useToast } from "@/app/providers/toastProvider";
 import { getMoviesReviews, getMovieTrailer } from "@/app/api/movies/movies-api-utils";
 import { useState, Dispatch, SetStateAction } from "react";
 import Reviews from "./reviews";
+import Link from "next/link";
 
 function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call: boolean, title: string, url: string }, id: string | number, setVedio: Dispatch<SetStateAction<{ call: boolean; title: string; url: string }>>, img: string; title: string, overview: string }) {
     const { showToast } = useToast();
@@ -15,7 +16,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
     async function getTrailer() {
 
         if (vedio.call || vedio.url) {
-        console.log("vedio is here")
+            console.log("vedio is here")
             return;
         }
 
@@ -36,7 +37,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
 
     async function getReviews() {
         if (reviews.length <= 0 || reviews.call) {
-                setActiveTab("reviews")
+            setActiveTab("reviews")
             return;
         }
 
@@ -59,7 +60,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
         <div>
             <div className={styles.featured} style={{ backgroundImage: `url(${img})` }}>
                 <div className={styles.featured_content}>
-                    <h2 className={styles.featured_title}>{title}</h2>
+                    <h2 className={styles.featured_title}>{title.split(" ").join("-")}</h2>
                     <p className={styles.featured_description}>{overview}</p>
                     <div className={styles.featured_tabs}>
                         <button className={`${styles.featured_tab} ${activeTab === "info" ? styles.active : ""}`} onClick={getInfo} >Informations</button>
@@ -67,7 +68,9 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
                         <button className={`${styles.featured_tab} ${activeTab === "reviews" ? styles.active : ""}`} onClick={getReviews}>Reviews</button>
                     </div>
                     <div className="hero-buttons">
-                        <button className="btn btn-primary"><PlayFill size={20} color="white" /> Watch</button>
+                        <Link href={`/stream/${id}/${title}`}>
+                            <button className="btn btn-primary"><PlayFill size={20} color="white" /> Watch</button>
+                        </Link>
                         <button className="btn btn-secondary"><Plus /> MY LIST</button>
                     </div>
                 </div>

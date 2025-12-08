@@ -1,5 +1,6 @@
+import { setToken } from "../utils/cookieUtils"
 async function registering(name: string, email: string, password: string, provider: "manul" | "google" | "facebook", providerId?: string,) {
-    
+
     if (provider === "manul" && (!name || !email || !password)) {
         return {
             message: "data is not completed yet",
@@ -17,9 +18,9 @@ async function registering(name: string, email: string, password: string, provid
     try {
         const url = process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_LOCALHOST_URL! : process.env.NEXT_PUBLIC_SERVER_URL!;
         const endpoint =
-  provider === "manul"
-    ? "/auth/register"
-    : "/auth/register-by-provider";
+            provider === "manul"
+                ? "/auth/register"
+                : "/auth/register-by-provider";
         const res = await fetch(url + endpoint, {
             method: "POST",
             headers: {
@@ -42,6 +43,10 @@ async function registering(name: string, email: string, password: string, provid
                 message: data.message,
                 status: data.status
             }
+        }
+        
+        if(data.status){
+        setToken(data.data.token as string)
         }
 
         return {

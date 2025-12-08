@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./css/verify-styles.module.css"
 import verify from "@/app/api/verify";
-import { setToken } from "@/app/utils/cookieUtils";
+import { setToken, setUserName } from "@/app/utils/cookieUtils";
 import { useRouter } from "next/navigation";
 
 function Verify({ email, time }: { email: string, time: number }) {
@@ -111,6 +111,7 @@ function Verify({ email, time }: { email: string, time: number }) {
 
         // set token
         setToken(res.data.token);
+        setUserName(res.data.name || "");
         router.push("/home")
 
     }

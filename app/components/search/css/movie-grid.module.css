@@ -1,0 +1,65 @@
+.results_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.results_count {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.results_count strong {
+  color: var(--text-primary);
+}
+
+.view_options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view_button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view_button.active,
+.view_button:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.sort_select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.sort_select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+/* Movie grid */
+.movies_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}

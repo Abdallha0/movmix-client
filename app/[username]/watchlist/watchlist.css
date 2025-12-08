@@ -1,0 +1,438 @@
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: rgba(20, 20, 30, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --text-muted: #6b6b7b;
+  --accent-gold: #e4b651;
+  --accent-gold-hover: #f5c864;
+  --accent-red: #e63946;
+  --accent-green: #2ecc71;
+  --accent-blue: #3498db;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(228, 182, 81, 0.15);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --font-main: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+.watchlist_page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Background Effects */
+.watchlist_page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 20% 20%, rgba(228, 182, 81, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(228, 182, 81, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.watchlist_main {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* Page Title Section */
+.page_title_section {
+  margin-bottom: 32px;
+}
+
+.page_title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.movie_count {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-glass);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.page_subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+
+.movies_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.empty_state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.empty_icon {
+  width: 120px;
+  height: 120px;
+  background: var(--bg-glass);
+  border: 2px dashed var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--text-muted);
+}
+
+.empty_title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.empty_description {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+.empty_cta {
+  padding: 14px 28px;
+  background: var(--accent-gold);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--bg-primary);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.empty_cta:hover {
+  background: var(--accent-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(228, 182, 81, 0.3);
+}
+
+/* ========================================
+   STATS SIDEBAR
+   ======================================== */
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .stats_section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .movies_grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .page_title {
+    font-size: 28px;
+  }
+
+  .search_container {
+    max-width: 320px;
+  }
+}
+
+/* Mobile Large (480px - 768px) */
+@media (max-width: 768px) {
+  .header_content {
+    flex-wrap: wrap;
+  }
+
+  .search_container {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+
+  .watchlist_main {
+    padding: 24px 16px 48px;
+  }
+
+  .page_title-section {
+    text-align: center;
+  }
+
+  .page_title {
+    font-size: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filters_section {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .filter_tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter_tab {
+    white-space: nowrap;
+  }
+
+  .filter_controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stats_section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat_card {
+    padding: 16px;
+  }
+
+  .stat_value {
+    font-size: 24px;
+  }
+
+  .movies_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .movie_info {
+    padding: 12px;
+  }
+
+  .movie_title {
+    font-size: 14px;
+  }
+
+  .movie_meta {
+    font-size: 12px;
+  }
+
+  .movie_genres {
+    display: none;
+  }
+}
+
+/* Mobile Small (< 480px) */
+@media (max-width: 480px) {
+  .watchlist_header {
+    padding: 12px 16px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .header_actions {
+    gap: 8px;
+  }
+
+  .icon-btn,
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .page_title {
+    font-size: 22px;
+  }
+
+  .movie_count {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
+  .stats_section {
+    gap: 10px;
+  }
+
+  .stat_card {
+    padding: 14px;
+  }
+
+  .stat_icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .stat_value {
+    font-size: 20px;
+  }
+
+  .stat_label {
+    font-size: 11px;
+  }
+
+  .movies_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .card_badges {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .rating_badge {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .status_badge {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .movie_info {
+    padding: 10px;
+  }
+
+  .movie_title {
+    font-size: 13px;
+  }
+
+  .movie_meta {
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .progress_container {
+    margin-top: 8px;
+  }
+
+  .filter_tab {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .dropdown_select {
+    padding: 8px 30px 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie_card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.movie_card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.movie_card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.movie_card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.movie_card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.movie_card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.movie_card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.movie_card:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.movie_card:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+/* Scrollbar Styling */
+.watchlist_page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.watchlist_page::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.watchlist_page::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.watchlist_page::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

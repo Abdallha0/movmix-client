@@ -1,7 +1,5 @@
 "use client"
 import AOS from "aos";
-import { useEffect, useState } from "react"
-import { useSessionStatus } from "../../hooks/session-status";
 import Search from "../forms/search-form";
 import Vtabs from "../tabs/vertical-tabs";
 import Featured from "./featured-movie";
@@ -10,9 +8,13 @@ import MovieDetails from "./movie-details";
 import SlideSection from "./slideSection";
 import Sidebar from "./sidebar";
 import styles from "./css/hero.module.css"
-import { nowPlay } from "@/app/api/movies/tmdb";
 import MovieGrid from "./movie-grid";
 import Vedio from "../vedio";
+import { nowPlay } from "@/app/api/movies/tmdb";
+import { useSession } from "next-auth/react";
+import { getUserName, setToken, getToken } from "@/app/utils/cookieUtils";
+import { useEffect, useState } from "react"
+import { useSessionStatus } from "../../hooks/session-status";
 
 function Home() {
   const status = useSessionStatus();
@@ -28,6 +30,17 @@ function Home() {
     url: "",
     call: false,
   });
+
+  let session = useSession();
+  const user = session.data?.user;
+  const token = session.data?.backendToken as string || null;
+  
+  useEffect(() => {
+
+  if(token && !getToken()){
+  setToken(token)
+  }
+}, [])
 
   useEffect(() => {
     async function fetchData() {
@@ -73,10 +86,11 @@ function Home() {
 
   if (status === "loading" || isLoading) return <div className="loader"></div>
 
+  let name = user?.name as string || getUserName() as string || "unknown";
   return (
     <div className="home-page">
-      <Header name="Abdallha M" photo={null} />
-      <Sidebar active="home" name="Abdallha Mohamed" />
+      <Header name={status === "authenticated" ? name : "GUEST"} photo={status === "authenticated" ? user?.image as string : ""} />
+      <Sidebar active="home" />
       <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
         <Search animation="fade-right" />
         <MovieDetails setVedio={setVedio} id={data[activeI]?.tmdb} title={data[activeI]?.title} ratting={data[activeI]?.ratting} overview={data[activeI]?.overview} />

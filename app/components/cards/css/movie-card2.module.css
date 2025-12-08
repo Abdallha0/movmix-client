@@ -1,113 +1,244 @@
-        .card {
-            width: 250px;
-            border-radius: 20px;
-            background: linear-gradient(#440101, rgb(153, 0, 0));
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+.movie_card {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
 
-        .card:active {
-            transform: scale(.9);
-        }
+.movie_card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: rgba(228, 182, 81, 0.3);
+}
 
-        .card img {
-            height: 150px;
-            width: 100%;
-            display: flex;
-            object-fit: fill;
-            flex-direction: column;
-            background: var(--background);
-            position: relative;
-            box-shadow: 0 0 10px #ac000098;
-        }
+.movie_poster_container {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
 
-        .bottom_section {
-            margin-top: 15px;
-            padding: 10px 5px;
-        }
+.movie_poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
 
-        .title {
-            display: block;
-            font-size: 17px;
-            font-weight: bolder;
-            color: white;
-            text-align: center;
-            letter-spacing: 2px;
-        }
+.movie_card:hover .movie_poster {
+    transform: scale(1.08);
+}
 
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+/* Poster Overlay */
+.poster_overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+}
 
-        .item {
-            flex: 30%;
-            text-align: center;
-            padding: 5px;
-            color: rgb(255, 255, 255);
-        }
+.movie_card:hover .poster_overlay {
+    opacity: 1;
+}
 
-        .big_text {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .3px;
-            display: block;
-        }
+.overlay_actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
-        .regular_text {
-            font-size: 11px;
-            font-weight: 500;
-        }
+.action_btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
 
-        .item:nth-child(2) {
-            border-left: 1px solid rgba(255, 255, 255, 0.126);
-            border-right: 1px solid rgba(255, 255, 255, 0.126);
-        }
+.action_btn.primary {
+    background: var(--accent-gold);
+    border: none;
+    color: var(--bg-primary);
+}
 
-        .overview {
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-        }
+.action_btn.primary:hover {
+    background: var(--accent-gold-hover);
+    transform: scale(1.02);
+}
 
-        .rating_contaienr {
-            position: absolute;
-            top: 125px;
-            right: .3rem;
-        }
+.action_btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
 
-        .rating_wrapper {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--background);
-            border-radius: 50%;
-        }
+.action_btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
 
-        .rating_text {
-            position: absolute;
-            font-size: 14px;
-            font-weight: bold;
-            color: #fff;
-        }
+/* Card Badges */
+.card_badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
 
-        .progress_ring__bg {
-            fill: none;
-            stroke: transparent;
-            stroke-width: 4;
-        }
+.rating_badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
 
-        .progress_ring__progress {
-            fill: none;
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-dasharray: 125.6;
-            transform: rotate(-20deg);
-            transform-origin: 50% 50%;
-        }
+.status_badge {
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status_badge.watching {
+    background: rgba(52, 152, 219, 0.2);
+    color: var(--accent-blue);
+    border: 1px solid rgba(52, 152, 219, 0.4);
+}
+
+.status_badge.completed {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--accent-green);
+    border: 1px solid rgba(46, 204, 113, 0.4);
+}
+
+.status_badge.plan-to-watch {
+    background: rgba(228, 182, 81, 0.2);
+    color: var(--accent-gold);
+    border: 1px solid rgba(228, 182, 81, 0.4);
+}
+
+/* Card Info */
+.movie_info {
+    padding: 16px;
+}
+
+.movie_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie_meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.movie_meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.movie_genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.genre_tag {
+    padding: 4px 10px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Progress Bar */
+.progress_container {
+    margin-top: 12px;
+}
+
+.progress_label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.progress_bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress_fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-gold) 0%, var(--accent-gold-hover) 100%);
+    border-radius: 2px;
+    transition: width var(--transition-normal);
+}
+
+/* Quick Remove Button */
+.quick_remove {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: none;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.movie_card:hover .quick_remove {
+    opacity: 1;
+}
+
+.quick_remove:hover {
+    background: var(--accent-red);
+    color: white;
+}
