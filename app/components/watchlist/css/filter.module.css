@@ -22,7 +22,7 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 500;
   font-family: inherit;
@@ -93,6 +93,6 @@
 }
 
 .view_btn.active {
-  background: var(--accent-gold);
+  background: var(--accent-red);
   color: var(--bg-primary);
 }

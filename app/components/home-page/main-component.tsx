@@ -17,7 +17,7 @@ import { useEffect, useState } from "react"
 import { useSessionStatus } from "../../hooks/session-status";
 
 function Home() {
-  const status = useSessionStatus();
+  const { sessionStatus } = useSessionStatus();
   useEffect(() => { AOS.init({ duration: 1000, once: true }) }, []);
   const [data, setData] = useState<any[]>([]);
   const [activeI, setActiveI] = useState(0);
@@ -31,7 +31,7 @@ function Home() {
     call: false,
   });
 
-  let session = useSession();
+  let session: any = useSession();
   const user = session.data?.user;
   const token = session.data?.backendToken as string || null;
   
@@ -84,12 +84,12 @@ function Home() {
     return () => clearTimeout(timer);
   }, [activeI, data]);
 
-  if (status === "loading" || isLoading) return <div className="loader"></div>
+  if (sessionStatus === "loading" || isLoading) return <div className="loader"></div>
 
   let name = user?.name as string || getUserName() as string || "unknown";
   return (
     <div className="home-page">
-      <Header name={status === "authenticated" ? name : "GUEST"} photo={status === "authenticated" ? user?.image as string : ""} />
+      <Header name={sessionStatus === "authenticated" ? name : "GUEST"} photo={sessionStatus === "authenticated" ? user?.image as string : ""} />
       <Sidebar active="home" />
       <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
         <Search animation="fade-right" />

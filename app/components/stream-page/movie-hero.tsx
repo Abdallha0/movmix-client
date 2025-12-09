@@ -33,7 +33,7 @@ export function MovieHero({ setShowVedio, id, poster, title, runtime, year, back
 
   const { showToast } = useToast();
   async function handleClick() {
-    const res = await mangePlayList("set", id, title, poster);
+    const res = await mangePlayList("set", id, title, poster, year, rating , 0, genres[0]);
     showToast(res.message, res.status ? "success" : "error");
   }
 

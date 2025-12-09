@@ -4,7 +4,6 @@ import { useState } from 'react';
 import styles from "./css/search-hero.module.css"
 interface SearchHeroProps {
   searchQuery: string
-  onSearchChange: (query: string) => void
 }
 
 export function SearchHero({ searchQuery }: SearchHeroProps) {

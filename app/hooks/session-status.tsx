@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { getToken } from "../utils/cookieUtils";
 
 export function useSessionStatus() {
-  const { status } = useSession();
+  const { status, data } = useSession() as any;
   const [token, setToken] = useState<string | null>(null);
   const [sessionStatus, setSessionStatus] = useState<"loading" | "authenticated" | "unauthenticated">("loading");
 
   useEffect(() => {
-    const t = getToken();
+    const t = getToken() || data?.user?.backendToken;
     setToken(t);
   }, []);
 
@@ -23,5 +23,5 @@ export function useSessionStatus() {
     }
   }, [status, token]);
 
-  return sessionStatus;
+  return {sessionStatus, token};
 }

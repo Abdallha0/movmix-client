@@ -21,7 +21,7 @@ export function MovieCard3({ movie }: MovieCardProps) {
 
   async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation()
-    const res = await mangePlayList("set", movie.id, movie.title, movie.poster);
+    const res = await mangePlayList("set", movie.id, movie.title, movie.poster, movie.year, movie.rating, 0, movie.genre);
     showToast(res.message, res.status ? "success" : "error");
   }
   return (

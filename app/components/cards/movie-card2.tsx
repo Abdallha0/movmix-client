@@ -1,44 +1,48 @@
-import { Calendar, Clock, Play, Plus, Star, X } from "lucide-react";
-
+import { Calendar, Play, Plus, Star, X } from "lucide-react";
+import styles from "./css/movie-card2.module.css"
+import Link from "next/link";
 interface DataTypes {
+    id: string | number;
     title: string;
     poster: string;
     rating: number;
     year: number;
-    runTime: string | number;
     progress: number;
-    genres: Array<string>
+    genres: Array<string>;
+    Mstatus: string;
+    removeMovie: (id: string | number) => void;
 }
-function MovieCard2({ title, poster, rating, year, runTime, progress, genres }: DataTypes) {
+function MovieCard2({ id, title, poster, rating, year, progress, genres, Mstatus, removeMovie }: DataTypes) {
     return (
-        <article className="movie-card">
-            <div className="movie-poster-container">
-                <img src={poster || "/placeholder.svg"} alt={title} className="movie-poster" />
+        <article className={styles.movie_card}>
+            <div className={styles.movie_poster_container}>
+                <img src={poster || "/placeholder.svg"} alt={title} className={styles.movie_poster} />
 
                 {/* Badges */}
-                <div className="card-badges">
-                    <div className="rating-badge">
+                <div className={styles.card_badges}>
+                    <div className={styles.rating_badge}>
                         <Star size={14} fill="currentColor" />
                         {rating}
                     </div>
-                    <span className={`status-badge ${status}`}>
-                        {status === "plan-to-watch" ? "Plan" : status}
+                    <span className={`${styles.status_badge} ${status}`}>
+                        {status === "plan_to_watch" ? "Plan" : status}
                     </span>
                 </div>
 
                 {/* Quick Remove */}
-                <button className="quick-remove" aria-label="Remove from watchlist">
+                <button className={styles.quick_remove} onClick={() => removeMovie(id)} aria-label="Remove from watchlist">
                     <X size={16} />
                 </button>
 
                 {/* Hover Overlay */}
-                <div className="poster-overlay">
-                    <div className="overlay-actions">
-                        <button className="action-btn primary">
-                            <Play size={16} fill="currentColor" />
-                            Watch
-                        </button>
-                        <button className="action-btn secondary">
+                <div className={styles.poster_overlay}>
+                    <div className={styles.overlay_actions}>
+                        <Link href={`/stream/${id}/${title.split(" ").join("-")}`}>
+                            <button className={`${styles.action_btn} ${styles.primary}`}>
+                                <Play size={16} fill="currentColor" />
+                                Watch
+                            </button></Link>
+                        <button className={`${styles.action_btn} ${styles.secondary}`}>
                             <Plus size={16} />
                             Info
                         </button>
@@ -46,40 +50,36 @@ function MovieCard2({ title, poster, rating, year, runTime, progress, genres }: 
                 </div>
             </div>
 
-            <div className="movie-info">
-                <h3 className="movie-title">{title}</h3>
-                <div className="movie-meta">
+            <div className={styles.movie_info}>
+                <h3 className={styles.movie_title}>{title}</h3>
+                <div className={styles.movie_meta}>
                     <span>
                         <Calendar size={12} />
                         {year}
                     </span>
-                    <span>
-                        <Clock size={12} />
-                        {runTime}
-                    </span>
                 </div>
-                <div className="movie-genres">
-                    {genres.map((genre) => (
-                        <span key={genre} className="genre-tag">
-                            {genre}
-                        </span>
-                    ))}
+                <div className={styles.movie_genres}>
+
+                    <span className={styles.genre_tag}>
+                        {genres}
+                    </span>
+
                 </div>
 
                 {/* Progress for watching movies */}
-                {status === "watching" && (
-                    <div className="progress-container">
-                        <div className="progress-label">
+                {Mstatus === "watching" && (
+                    <div className={styles.progress_container}>
+                        <div className={styles.progress_label}>
                             <span>Progress</span>
                             <span>{progress}%</span>
                         </div>
-                        <div className="progress-bar">
-                            <div className="progress-fill" style={{ width: `${progress}%` }} />
+                        <div className={styles.progress_bar}>
+                            <div className={styles.progress_fill} style={{ width: `${progress}%` }} />
                         </div>
                     </div>
                 )}
             </div>
-        </article>
+        </article >
     )
 }
 

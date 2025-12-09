@@ -13,15 +13,12 @@ export function MovieSearchPage() {
   useEffect(() => { AOS.init({ duration: 1000, once: true }) }, []);
   const params = useSearchParams();
   const query: string = params.get("q")?.split("-").join(" ") || "";
-  const [selectedGenres, setSelectedGenres] = useState<string[]>(["Action"])
   const [currentPage, setCurrentPage] = useState(1)
   const { showToast } = useToast();
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const fetched = useRef(false);
 
   useEffect(() => {
-
     async function fetchData() {
       if (!query) {
         setLoading(false);
@@ -34,7 +31,7 @@ export function MovieSearchPage() {
           setLoading(false);
           return;
         }
-
+        console.log(res)
         setData(res.data);
       } catch (err) {
         showToast("Something went wrong", "error");
@@ -47,19 +44,15 @@ export function MovieSearchPage() {
   }, [query]);
   if (loading) return <div className="loader"></div>;
 
-  const toggleGenre = (genre: string) => {
-    setSelectedGenres((prev) => (prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]))
-  }
-
   return (
     <div className="search-page">
-    <header className="navbar"> <Link href="/home" className="logo"> Movmix </Link> </header>
+      <header className="navbar"> <Link href="/home" className="logo"> Movmix </Link> </header>
       <main className="main-container">
         <SearchHero searchQuery={query || data.query} />
         <div className="content-layout">
           <div className="main-content">
             <MovieGrid movies={data.movies} searchQuery={query || data.query} />
-            { data.totalPages > 8 && <Pagination currentPage={currentPage} totalPages={data.totalPages} onPageChange={setCurrentPage} />}
+            {data.totalPages > 8 && <Pagination currentPage={currentPage} totalPages={data.totalPages} onPageChange={setCurrentPage} />}
           </div>
         </div>
       </main>

@@ -10,6 +10,7 @@ interface MovieGridProps {
     rating: number
     genre: string
     poster: string
+  genres: Array<string>
 
   }]
 }

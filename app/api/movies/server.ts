@@ -76,7 +76,7 @@ export async function getStreamData(id: number | string) {
 }
 
 
-export async function mangePlayList(route: "set" | "get" | "remove", f_id?: string | number, title?: string, poster?: string) {
+export async function mangePlayList(route: "set" | "get" | "remove", f_id?: string | number, title?: string, poster?: string, year?: number, rating?: number, progress?: number, genres?: string) {
     let options;
     let headers = {
         "Content-Type": "application/json",
@@ -91,10 +91,17 @@ export async function mangePlayList(route: "set" | "get" | "remove", f_id?: stri
             }
             break;
         case "set":
+            if (!f_id || !title || !poster || !year || !genres || !rating) {
+                console.log(f_id, title, poster, year, genres, progress, rating)
+                return {
+                    message: "data of movie is't completed to put it in watchlist",
+                    status: false,
+                }
+            }
             options = {
                 method: "POST",
                 headers,
-                body: JSON.stringify({ f_id, title: title, poster })
+                body: JSON.stringify({ f_id, title, poster, year, genres, progress, rating })
             }
             break;
         case "remove":
