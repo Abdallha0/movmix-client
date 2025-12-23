@@ -12,7 +12,7 @@ import MovieGrid from "./movie-grid";
 import Vedio from "../vedio";
 import { nowPlay } from "@/app/api/movies/tmdb";
 import { useSession } from "next-auth/react";
-import { getUserName, setToken, getToken } from "@/app/utils/cookieUtils";
+import { getUserName, setToken, getToken, getImage } from "@/app/utils/cookieUtils";
 import { useEffect, useState } from "react"
 import { useSessionStatus } from "../../hooks/session-status";
 
@@ -34,13 +34,13 @@ function Home() {
   let session: any = useSession();
   const user = session.data?.user;
   const token = session.data?.backendToken as string || null;
-  
+  const [ind, setInd] = useState(0)
   useEffect(() => {
 
-  if(token && !getToken()){
-  setToken(token)
-  }
-}, [])
+    if (session.status === "authenticated" && token && !getToken()) {
+      setToken(token)
+    }
+  }, [session.status ])
 
   useEffect(() => {
     async function fetchData() {
@@ -58,11 +58,11 @@ function Home() {
     }
 
     fetchData();
+
   }, []);
 
   useEffect(() => {
     if (!data.length) return;
-
 
     if (!data[activeI]?.backdrop) {
       setActiveI((prev) => {
@@ -87,9 +87,10 @@ function Home() {
   if (sessionStatus === "loading" || isLoading) return <div className="loader"></div>
 
   let name = user?.name as string || getUserName() as string || "unknown";
+  let photo = user?.image as string || getImage() as string || "/profile.png"
   return (
     <div className="home-page">
-      <Header name={sessionStatus === "authenticated" ? name : "GUEST"} photo={sessionStatus === "authenticated" ? user?.image as string : ""} />
+      <Header name={sessionStatus === "authenticated" ? name : "GUEST"} photo={sessionStatus === "authenticated" ? photo : ""} />
       <Sidebar active="home" />
       <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(32 32 32 / 50%), rgb(32 32 32 / 50%)), url(${data[activeI]?.backdrop})` }}>
         <Search animation="fade-right" />
@@ -104,7 +105,7 @@ function Home() {
       </section>
 
       <section className="section">
-        <Featured vedio={vedio} setVedio={setVedio} id={data[1]?.tmdb} img={data[1]?.backdrop} title={data[1]?.title} overview={data[1]?.overview} />
+        <Featured vedio={vedio} setVedio={setVedio} id={data[ind]?.tmdb} img={data[ind]?.backdrop} title={data[ind]?.title} overview={data[ind]?.overview} />
       </section>
       {vedio.call && <Vedio title={vedio.title} setVedio={setVedio} url={vedio.url} />}
     </div>

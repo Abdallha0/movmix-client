@@ -21,7 +21,8 @@ function Header({ name, photo }: { name: string, photo: string }) {
                     style={photo ? { backgroundImage: `url(${photo})` } : { background: "transparent" }}>
                     {!photo && <CircleUserRound />}
                 </div>
-            </div>) : (<Link href="/login"><button>Log in</button></Link>) }
+            </div>) : (<Link href="/login"> <button className={`${styles.login_btn} click-effect`}>log in</button>
+            </Link>)}
         </header>
     )
 }

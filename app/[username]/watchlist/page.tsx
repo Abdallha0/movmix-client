@@ -98,9 +98,9 @@ export default function Page() {
               Mstatus={movie.status}
             />
           )) : (
-            <div className="w-100 text-center">
+            <div className={styles.error_conteiner}>
               <h2 className="error-msg">No movies in your watchlist</h2>
-              <Link href="/home">add some movies</Link>
+              <Link href="/home" style={{color: "var(--brand-color)"}}>Add some movies</Link>
             </div>
           )}
         </div>

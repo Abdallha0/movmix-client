@@ -110,8 +110,14 @@ function Verify({ email, time }: { email: string, time: number }) {
         }
 
         // set token
-        setToken(res.data.token);
+        setToken(res.data.token || "");
         setUserName(res.data.name || "");
+            if (!res.data.photo && typeof window !== "undefined") {
+      window.sessionStorage.setItem('form-allaw', "allow");
+    } else {
+      sessionStorage.removeItem('form-allaw')
+      setImage(res.data.photo || "/profile.png")
+    }
         router.push("/home")
 
     }

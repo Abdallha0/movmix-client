@@ -60,7 +60,7 @@ function Featured({ vedio, id, title, overview, img, setVedio }: { vedio: { call
         <div>
             <div className={styles.featured} style={{ backgroundImage: `url(${img})` }}>
                 <div className={styles.featured_content}>
-                    <h2 className={styles.featured_title}>{title.split(" ").join("-")}</h2>
+                    <h2 className={styles.featured_title}>{title}</h2>
                     <p className={styles.featured_description}>{overview}</p>
                     <div className={styles.featured_tabs}>
                         <button className={`${styles.featured_tab} ${activeTab === "info" ? styles.active : ""}`} onClick={getInfo} >Informations</button>

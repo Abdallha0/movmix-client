@@ -18,6 +18,7 @@ function Page() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [data, setData] = useState<any>({});
+    const [userData, setUserData] = useState<any>({});
     const { showToast } = useToast();
     const [showVedio, setShowVedio] = useState({ call: false })
 
@@ -42,6 +43,7 @@ function Page() {
             }
 
             setData(res.data);
+            setUserData(res.user)
             setIsLoading(false)
         }
 
@@ -55,7 +57,7 @@ function Page() {
 
     return (
         <main className={styles.main}>
-            <MovieHero id={data.tmdb || data.imdb} poster={data.poster} setShowVedio={setShowVedio} backdrop={data.backdrop} year={data.year} runtime={data.runtime} genres={data.genre} metascore={data.metascoreRating} overview={data.overview} rated={data.rated} rating={data.imdbRating} title={data.title} />
+            <MovieHero id={data.tmdb || data.imdb} poster={data.poster} liked={userData.liked} setShowVedio={setShowVedio} backdrop={data.backdrop} year={data.year} runtime={data.runtime} genres={data.genre} metascore={data.metascoreRating} overview={data.overview} rated={data.rated} rating={data.imdbRating} title={data.title} />
             <div className={styles.content}>
                 <MovieDetails
                     id={data.tmdb}
@@ -80,7 +82,7 @@ function Page() {
                 <ReviewsSection id={data.tmdb} />
                 <SimilarMovies id={data.tmdb} genre={data.genre[0]} />
             </div>
-            <Sidebar name="Abdallha mohamed" />
+            <Sidebar />
             {showVedio.call && <Vedio url={data.vedio} title={data.title} setVedio={setShowVedio} />}
         </main>
     )

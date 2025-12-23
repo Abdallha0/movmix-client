@@ -1,5 +1,5 @@
 import { setToken } from "../utils/cookieUtils"
-async function registering(name: string, email: string, password: string, provider: "manul" | "google" | "facebook", providerId?: string,) {
+async function registering(name: string, email: string, password: string, image?: string, provider: "manul" | "google" | "facebook", providerId?: string,) {
 
     if (provider === "manul" && (!name || !email || !password)) {
         return {
@@ -26,7 +26,7 @@ async function registering(name: string, email: string, password: string, provid
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(provider === "manul" ? { name, email, password, provider } : { name, email, password, provider, providerId })
+            body: JSON.stringify(provider === "manul" ? { name, email, password, image, provider } : { name, email, password, image, provider, providerId })
         });
 
         if (!res.ok) {
@@ -45,10 +45,6 @@ async function registering(name: string, email: string, password: string, provid
             }
         }
         
-        if(data.status){
-        setToken(data.data.token as string)
-        }
-
         return {
             message: "signup success",
             status: data.status,

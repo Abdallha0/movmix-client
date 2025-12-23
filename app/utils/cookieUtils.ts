@@ -37,22 +37,22 @@ export const removeUserName = () => {
   deleteCookie("userName");
 };
 
-// Auth type management
-export const setAuthType = (type: string) => {
-  setCookie("authType", type, COOKIE_CONFIG);
+export const setImage = (image: string) => {
+console.log("in func")
+  setCookie("p_path", image, COOKIE_CONFIG);
 };
 
-export const getAuthType = () => {
-  return getCookie("authType") as string | undefined;
+export const getImage = () => {
+  return getCookie("p_path") as string | undefined;
 };
 
-export const removeAuthType = () => {
-  deleteCookie("authType");
+export const removeImage = () => {
+  deleteCookie("p_path");
 };
 
 // Clear all auth-related cookies
 export const clearAuthCookies = () => {
   removeToken();
   removeUserName();
-  removeAuthType();
+  removeImage();
 }; 

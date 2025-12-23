@@ -1,0 +1,75 @@
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.avatarSection {
+  position: relative;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--brand-color);
+  box-shadow: 0 8px 32px #d4373733;
+}
+
+.saveBtn {
+  padding: 5px 12px;
+  color: #fff;
+  background-color: var(--brand-color);
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  position: absolute;
+  bottom: -.5rem;
+  left: 50%;
+  transform: translate(-50%, 0)
+}
+
+.badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #d4af37;
+  color: #0a0f1c;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.userInfo {
+  text-align: center;
+}
+
+.userName {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.userHandle {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin: 0 0 1rem 0;
+}
+
+.joinDate {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}

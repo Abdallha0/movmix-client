@@ -2,7 +2,7 @@ import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import registering from "@/app/api/registering";
-
+import { setToken } from "@/app/utils/cookieUtils"
 export const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
@@ -33,7 +33,7 @@ export const authOptions: AuthOptions = {
         async jwt({ token, account, user }) {
             if (account && user) {
                 // call registeration function
-                const data = await registering(user.name as string, user.email as string, "", account.provider as "google" | "facebook", account.providerAccountId as string);
+                const data = await registering(user.name as string, user.email as string, "", user.image as string || "", account.provider as "google" | "facebook", account.providerAccountId as string );
                 if (data?.data.token) {
                     token.accessToken = data.data.token;
                 }

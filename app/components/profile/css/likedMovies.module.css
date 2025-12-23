@@ -1,0 +1,37 @@
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.viewAll {
+  color: var(--brand-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: opacity 0.3s ease;
+}
+
+.viewAll:hover {
+  opacity: 0.7;
+}
+
+
+.moviesSection {
+  margin-bottom: 3rem;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+}

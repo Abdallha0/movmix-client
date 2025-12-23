@@ -226,16 +226,10 @@
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--foreground);
   background: transparent;
   transition: background-color 0.2s, border-color 0.2s;
-}
-
-.iconButton:hover {
-  background-color: var(--secondary);
-  border-color: var(--muted-foreground);
 }
 
 .muteButton {

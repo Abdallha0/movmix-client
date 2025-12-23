@@ -97,6 +97,14 @@ ul {
   align-items: center;
 }
 
+.center-page-abs{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999999999999;
+}
+
 .logo {
   color: var(--brand-color);
   font-family: var(--brand-font);

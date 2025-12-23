@@ -1,10 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { Heart, Play, Plus, ThumbsUp, Volume2, VolumeX } from "lucide-react"
+import { Heart, Play, Plus, Volume2, VolumeX } from "lucide-react"
 import styles from "./css/movie-hero.module.css";
 import { useToast } from "@/app/providers/toastProvider";
-import { mangePlayList } from "@/app/api/movies/server";
+import { mangePlayList, user_data_mangment } from "@/app/api/movies/server";
+import HeartFill from "../icons/heart-fill";
 
 interface HeroData {
   setShowVedio: (s: { call: boolean }) => void;
@@ -18,11 +19,13 @@ interface HeroData {
   poster: string;
   rating: number;
   overview: string;
-  genres: Array<string>
+  genres: Array<string>;
+  liked: boolean;
 }
 
-export function MovieHero({ setShowVedio, id, poster, title, runtime, year, backdrop, metascore, rated, rating, overview, genres }: HeroData) {
+export function MovieHero({ setShowVedio, id, poster, title, runtime, year, backdrop, metascore, rated, rating, overview, genres, liked }: HeroData) {
   const [isMuted, setIsMuted] = useState(true);
+  const [like, setLiked] = useState(liked);
 
   function formatTime(minutes: number) {
     const hours = Math.floor(minutes / 60);
@@ -33,10 +36,22 @@ export function MovieHero({ setShowVedio, id, poster, title, runtime, year, back
 
   const { showToast } = useToast();
   async function handleClick() {
-    const res = await mangePlayList("set", id, title, poster, year, rating , 0, genres[0]);
+    const res = await mangePlayList("set", id, title, poster, year, rating, 0, genres[0]);
     showToast(res.message, res.status ? "success" : "error");
   }
 
+
+  async function handleLike() {
+     await user_data_mangment("set-like", { m_id: id, poster: poster, rating: rating, title: title, year: year });
+    setLiked(true)
+
+  }
+
+  async function handleRemoveLike() {
+    await user_data_mangment("delete-like", { m_id: id });
+    setLiked(false)
+
+  }
   return (
     <section className={styles.hero}>
       <div className={styles.backdrop}>
@@ -80,9 +95,13 @@ export function MovieHero({ setShowVedio, id, poster, title, runtime, year, back
               <Plus size={20} />
               Play List
             </button>
-            <button className={styles.iconButton} aria-label="Like">
-              <Heart size={20} />
-            </button>
+            {
+              like ? <button className={styles.iconButton} aria-label="Like" onClick={handleRemoveLike}>
+                <HeartFill size={20} color="red" />
+              </button> : <button className={styles.iconButton} aria-label="Like" onClick={handleLike}>
+                <Heart size={20} />
+              </button>
+            }
           </div>
         </div>
 

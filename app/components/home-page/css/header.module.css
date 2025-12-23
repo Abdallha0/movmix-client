@@ -1,5 +1,5 @@
 .header {
-z-index: 9999;
+    z-index: 9999;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     justify-content: space-between;
@@ -7,8 +7,7 @@ z-index: 9999;
     width: calc(100% - 1rem - 15px);
     height: 50px;
     padding: .5rem 1rem;
-    display: flex
-;
+    display: flex;
     position: fixed;
     top: .5rem;
     border: solid .5px #ffffff2b;
@@ -42,6 +41,24 @@ z-index: 9999;
 .logo {
     font-size: 20px;
     letter-spacing: 3px;
+}
+
+.login_btn {
+    padding: 14px 23px;
+    color: #fff;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 18px;
+    font-weight: 800;
+    user-select: none;
+    box-shadow: 3px 3px 10px 3px #ff00003d;
+    background: linear-gradient(150deg, red, #961f01, #6b0000);
+    scale: .7;
+}
+
+.login_btn:active {
+    box-shadow: none;
 }
 
 .user_section {

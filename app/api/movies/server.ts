@@ -2,6 +2,10 @@ import { getToken } from "@/app/utils/cookieUtils";
 
 const url = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.NEXT_PUBLIC_LOCALHOST_URL
 
+var headers = {
+    "Content-Type": "application/json",
+    Authorization: getToken() || ""
+}
 export async function searchMovie(query: string) {
     try {
         const res = await fetch(`${url}/movies/search?query=${query}`);
@@ -75,13 +79,9 @@ export async function getStreamData(id: number | string) {
     }
 }
 
-
 export async function mangePlayList(route: "set" | "get" | "remove", f_id?: string | number, title?: string, poster?: string, year?: number, rating?: number, progress?: number, genres?: string) {
     let options;
-    let headers = {
-        "Content-Type": "application/json",
-        Authorization: getToken() || ""
-    }
+
 
     switch (route) {
         case "get":
@@ -132,6 +132,146 @@ export async function mangePlayList(route: "set" | "get" | "remove", f_id?: stri
     } catch (error: any) {
         return {
             message: error.message || "Internal server error", status: false
+        }
+    }
+}
+
+/*
+
+auth
+/upload/profile-img   (POST)
+/user/profile         (GET)
+-------------------------------------
+
+movies
+/data-mangement/set-new-watch-score   [body => timer]  (POST)
+/data-mangement/set-rating      [body => rating, m_id] (POST)
+/data-mangement/delete-rating   [body => m_id]         (DELETE)
+/data-mangement/set-like        [body =>  m_id, title, poster, rating, year]   (POST)
+/data-mangement/delete-like     [body => m_id]         (DELETE)
+
+comments
+/set          [body => comment, rating, m_id]   (POST)
+/delete       [body =>  m_id, c_id]             (DELETE)
+
+*/
+
+export async function getProfile() {
+    try {
+        const res = await fetch(`${url}/auth/user/profile`, {
+            method: "GET",
+            headers,
+        });
+
+        const data = await res.json();
+
+        if (!data.status) return {
+            message: data.message || "internal server error",
+            status: false
+        }
+
+        return {
+            data: data.data || [],
+            status: data.status
+        }
+    } catch (error: any) {
+        return {
+            message: error.message || "Internal server error",
+            status: false
+        }
+    }
+}
+
+export async function UploadImg(formData: FormData) {
+    try {
+        const res = await fetch(`${url}/auth/upload/profile-img`, {
+            method: "POST",
+            headers: {
+                Authorization: getToken() || ""
+            },
+            body: formData
+        });
+        console.log(res)
+        if (!res.ok) {
+            return {
+                message: "Error when conection!",
+                status: false
+            }
+        }
+
+        const data = await res.json();
+
+        if (!data.status) return {
+            message: data.message || "internal server error",
+            status: false
+        }
+
+        return data
+    } catch (error: any) {
+        return {
+            message: error.message || "internal server error",
+            status: false
+        }
+    }
+}
+
+export async function user_data_mangment(route: "set-new-watch-score" | "set-rating" | "delete-rating" | "set-like" | "delete-like",
+    reqData: { timer?: number, m_id?: string | number, title?: string, rating?: number, poster?: string, year?: number }) {
+console.log(route, reqData)
+    if (!route) return;
+
+    let options = {
+        method: "",
+        headers,
+        body: ""
+    }
+
+    switch (route) {
+        case "set-new-watch-score":
+            if (!reqData.timer) return;
+            options["method"] = "POST";
+            options["body"] = JSON.stringify({ timer: reqData.timer });
+            break;
+        case "set-rating":
+            if (!reqData.m_id || !reqData.rating) return;
+            options["method"] = "POST";
+            options["body"] = JSON.stringify({ m_id: reqData.m_id, rating: reqData.rating });
+            break;
+        case "delete-rating":
+            if (!reqData.m_id) return;
+            options["method"] = "DELETE";
+            options["body"] = JSON.stringify({ m_id: reqData.m_id });
+            break;
+        case "set-like":
+            if (!reqData.m_id) return;
+            options["method"] = "POST";
+            options["body"] = JSON.stringify({ m_id: reqData.m_id, title: reqData.title, poster: reqData.poster, rating: reqData.rating, year: reqData.year });
+            break;
+        case "delete-like":
+            if (!reqData.m_id) return;
+            options["method"] = "DELETE";
+            options["body"] = JSON.stringify({ m_id: reqData.m_id });
+            break;
+
+    }
+
+    try {
+        const res = await fetch(`${url}/movies/data-mangement/${route}`, options);
+        const data = await res.json();
+console.log(res, data)
+        if (!data?.status) return {
+            message: data.message,
+            status: false,
+        }
+
+        return {
+            message: data?.message,
+            status: data?.status
+        }
+    } catch (error: any) {
+        return {
+            message: error.message || "internal server error",
+            status: false
         }
     }
 }

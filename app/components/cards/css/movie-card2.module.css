@@ -10,7 +10,6 @@
 .movie_card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg), var(--shadow-glow);
-    border-color: rgba(228, 182, 81, 0.3);
 }
 
 .movie_poster_container {
@@ -34,7 +33,7 @@
 .poster_overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 100%);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 100%);
     opacity: 0;
     transition: opacity var(--transition-normal);
     display: flex;
@@ -51,12 +50,17 @@
     display: flex;
     gap: 10px;
     margin-bottom: 12px;
+    height: 100%;
+    align-items: center;
+        justify-content: center;
+            position: relative;
+            z-index: 999;
 }
 
 .action_btn {
-    flex: 1;
-    padding: 12px 16px;
-    border-radius: var(--radius-md);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     font-size: 13px;
     font-weight: 600;
     font-family: inherit;
@@ -66,16 +70,19 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
 }
 
 .action_btn.primary {
-    background: var(--accent-gold);
+    background: linear-gradient(to top, var(--brand-color), red) ;
     border: none;
-    color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .action_btn.primary:hover {
-    background: var(--accent-gold-hover);
+        background: linear-gradient(to top, var(--accent-red-hover), red) ;
     transform: scale(1.02);
 }
 
@@ -83,6 +90,7 @@
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--text-primary);
+    backdrop-filter: blur(2px)
 }
 
 .action_btn.secondary:hover {
@@ -143,6 +151,14 @@
 /* Card Info */
 .movie_info {
     padding: 16px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+.movie_card:hover .movie_info{
+    opacity: 1;
 }
 
 .movie_title {
@@ -159,13 +175,14 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--text-muted);
+    color: var(--text-primary);
     font-size: 13px;
 }
 
 .movie_meta span {
     display: flex;
     align-items: center;
+    font-weight: 500;
     gap: 4px;
 }
 

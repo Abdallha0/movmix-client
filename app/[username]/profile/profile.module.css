@@ -1,0 +1,57 @@
+/* Movie Profile Page - Pure CSS */
+
+.profileContainer {
+  min-height: 100vh;
+  color: #e8eaed;
+  padding: 2rem 1rem;
+}
+
+.profileWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.error_conteiner {
+  width: 100%;
+  min-width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 1rem;
+}
+
+.error_conteiner a:hover {
+  transition: .5s;
+  text-decoration: underline;
+}
+/* Responsive Design */
+@media (min-width: 640px) {
+  .profileHeader {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .userInfo {
+    text-align: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .profileContainer {
+    padding: 3rem 2rem;
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .profileContainer {
+    padding: 4rem 2rem;
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}

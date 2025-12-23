@@ -40,12 +40,9 @@ function MovieCard2({ id, title, poster, rating, year, progress, genres, Mstatus
                         <Link href={`/stream/${id}/${title.split(" ").join("-")}`}>
                             <button className={`${styles.action_btn} ${styles.primary}`}>
                                 <Play size={16} fill="currentColor" />
-                                Watch
+                                
                             </button></Link>
-                        <button className={`${styles.action_btn} ${styles.secondary}`}>
-                            <Plus size={16} />
-                            Info
-                        </button>
+
                     </div>
                 </div>
             </div>
