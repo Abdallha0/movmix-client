@@ -1,4 +1,4 @@
-import { mangePlayList } from "@/app/api/movies/server";
+import { mangePlayList } from "@/app/api/server";
 import styles from "./css/movie-card3.module.css";
 import Link from "next/link";
 import { useToast } from "@/app/providers/toastProvider";

@@ -1,5 +1,5 @@
 import { title } from "process";
-import { getLocationDetails } from "../location";
+import { getLocationDetails } from "./location";
 import { allGenres } from "./utils";
 
 const key1 = `api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY!}`;

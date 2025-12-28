@@ -1,11 +1,6 @@
-import { getToken } from "@/app/utils/cookieUtils";
+import {url, headers} from "./utils"
+import { getToken } from "../utils/cookieUtils"
 
-const url = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.NEXT_PUBLIC_LOCALHOST_URL
-
-var headers = {
-    "Content-Type": "application/json",
-    Authorization: getToken() || ""
-}
 export async function searchMovie(query: string) {
     try {
         const res = await fetch(`${url}/movies/search?query=${query}`);
@@ -29,7 +24,7 @@ export async function searchMovie(query: string) {
         }
 
     } catch (error: any) {
-        console.log(error)
+
         return {
             message: error.message || "internal server error",
             status: false,
@@ -67,7 +62,6 @@ export async function getStreamData(id: number | string) {
                 status: false,
             }
         }
-
         return data
 
     } catch (error: any) {
@@ -191,13 +185,6 @@ export async function UploadImg(formData: FormData) {
             },
             body: formData
         });
-        console.log(res)
-        if (!res.ok) {
-            return {
-                message: "Error when conection!",
-                status: false
-            }
-        }
 
         const data = await res.json();
 
@@ -217,7 +204,7 @@ export async function UploadImg(formData: FormData) {
 
 export async function user_data_mangment(route: "set-new-watch-score" | "set-rating" | "delete-rating" | "set-like" | "delete-like",
     reqData: { timer?: number, m_id?: string | number, title?: string, rating?: number, poster?: string, year?: number }) {
-console.log(route, reqData)
+
     if (!route) return;
 
     let options = {
@@ -258,7 +245,7 @@ console.log(route, reqData)
     try {
         const res = await fetch(`${url}/movies/data-mangement/${route}`, options);
         const data = await res.json();
-console.log(res, data)
+
         if (!data?.status) return {
             message: data.message,
             status: false,

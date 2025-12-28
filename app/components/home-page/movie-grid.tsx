@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import MovieCard from "../cards/movie-card";
-import { newMovies, popular, topMovies, trending } from "@/app/api/movies/tmdb";
+import { newMovies, popular, topMovies, trending } from "@/app/api/tmdb";
 import { useToast } from "@/app/providers/toastProvider";
 import Link from "next/link";
 

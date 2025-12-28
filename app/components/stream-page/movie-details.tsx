@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import { Clock, Calendar, Globe, Film, Award } from "lucide-react"
 import styles from "./css/movie-details.module.css"
-import { getTrailers } from "@/app/api/movies/tmdb";
+import { getTrailers } from "@/app/api/tmdb";
 
 interface DetailsData {
   id: number;

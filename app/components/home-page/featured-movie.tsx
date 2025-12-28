@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 import PlayFill from "../icons/play-fill";
 import styles from "./css/featured.module.css"
 import { useToast } from "@/app/providers/toastProvider";
-import { getMoviesReviews, getMovieTrailer } from "@/app/api/movies/movies-api-utils";
+import { getMoviesReviews, getMovieTrailer } from "@/app/api/movies-api-utils";
 import { useState, Dispatch, SetStateAction } from "react";
 import Reviews from "./reviews";
 import Link from "next/link";

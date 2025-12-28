@@ -1,5 +1,5 @@
 import { X } from "lucide-react"
-import { user_data_mangment } from "../api/movies/server";
+import { user_data_mangment } from "../api/server";
 
 function Vedio({ url, title, setVedio }: { url: string, title: string, setVedio: (p: { call: boolean, title: string, url: string }) => void }) {
     var count = 0;

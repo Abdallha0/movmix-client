@@ -38,7 +38,6 @@ export const removeUserName = () => {
 };
 
 export const setImage = (image: string) => {
-console.log("in func")
   setCookie("p_path", image, COOKIE_CONFIG);
 };
 

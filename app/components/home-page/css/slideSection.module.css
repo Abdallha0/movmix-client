@@ -1,6 +1,6 @@
 .sec1 {
     position: absolute;
-    bottom: -12vh;
+    bottom: -14vh;
     width: 100%;
     padding: 0 1rem;
     left: 0;
@@ -17,7 +17,7 @@ font-weight: 600;
     width: 100%;
     border-radius: 1rem;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px #ffffff30;
+    box-shadow: 0 0 20px #3f3f3f;
     overflow: hidden;
 }
 

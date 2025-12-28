@@ -3,13 +3,13 @@
 import { useRef, useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Play, Plus } from "lucide-react"
 import styles from "./css/similar-movies.module.css"
-import { getSimilarMovies } from "@/app/api/movies/movies-api-utils"
+import { getSimilarMovies } from "@/app/api/movies-api-utils"
 import Link from "next/link";
 
-export function SimilarMovies({id, genre}: {id: number, genre: string}) {
+export function SimilarMovies({ id, genre }: { id: number, genre: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const [similarMovies, setSimilarMovies] = useState({ status: false, data: [], message: "" });
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,10 +17,10 @@ export function SimilarMovies({id, genre}: {id: number, genre: string}) {
       const res = await getSimilarMovies(id, 2);
       if (!res) return;
 
-      setSimilarMovies(res);
+      setSimilarMovies(res.data);
     }
 
-      fetchData();
+    fetchData();
   }, [])
 
   const scroll = (direction: "left" | "right") => {
@@ -48,7 +48,7 @@ export function SimilarMovies({id, genre}: {id: number, genre: string}) {
       </div>
 
       <div ref={scrollRef} className={styles.scrollContainer}>
-        {similarMovies.data.map((movie, i) => (
+        {similarMovies.length >= 1 ? similarMovies.filter((i: any) => !i.poster && !i.title).map((movie: any, i: number) => (
           <div key={movie.id || i} className={styles.movieCard}>
             <div className={styles.imageWrapper}>
               <img
@@ -57,10 +57,10 @@ export function SimilarMovies({id, genre}: {id: number, genre: string}) {
               />
 
               <div className={styles.hoverOverlay}>
-              <Link href={`/stream/${movie.id}/${movie.title.split(" ").join("-")}`}>
-                <button className={styles.playButton} aria-label="Play">
-                  <Play size={20} fill="currentColor" />
-                </button>
+                <Link href={`/stream/${movie.id}/${movie.title.split(" ").join("-")}`}>
+                  <button className={styles.playButton} aria-label="Play">
+                    <Play size={20} fill="currentColor" />
+                  </button>
                 </Link>
                 <button className={styles.addButton} aria-label="Add to list">
                   <Plus size={20} />
@@ -73,7 +73,7 @@ export function SimilarMovies({id, genre}: {id: number, genre: string}) {
             <h3 className={styles.movieTitle}>{movie.title || ""}</h3>
             <p className={styles.movieYear}>{movie.year || ""}</p>
           </div>
-        ))}
+        )) : <></>}
       </div>
     </section>
   )

@@ -46,10 +46,10 @@ export async function getMoviesReviews(id: number, key: 1 | 2) {
         
         return {
             data: data.results.map((i: any) => ({
-                author: i.author || i.author_details.name || i.author_details.username || "user",
-                avatar: i.author_details.avatar_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${i.author_details.avatar_path}` : "",
+                userName: i.author || i.author_details.name || i.author_details.username || "user",
+                photo: i.author_details.avatar_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${i.author_details.avatar_path}` : "",
                 rating: i.author_details.rating || 0,
-                content: i.content || "",
+                comment: i.content || "",
                 date: i.updated_at,
             })) || [],
             status: true

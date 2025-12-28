@@ -15,10 +15,16 @@
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
+
 }
 
 .reviewCard:hover {
   background: rgba(255, 255, 255, 0.05);
+}
+
+.content{
+  position: relative;
+  margin-bottom: 1rem;
 }
 
 .reviewHeader {
@@ -52,12 +58,21 @@ color: var(--brand-color);
 .reviewText {
   color: #d1d5db;
   line-height: 1.6;
-  margin: 0 0 1rem 0;
+  margin-bottom: .5rem
 }
 
 .reviewMeta {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   font-size: 0.875rem;
   color: #6b7280;
+  width: 100%;
+}
+
+.removeComment{
+color: red;
+position: absolute;
+bottom: 0;
+scale: .8;
+right: 0;
 }

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Heart, Play, Plus, Volume2, VolumeX } from "lucide-react"
 import styles from "./css/movie-hero.module.css";
 import { useToast } from "@/app/providers/toastProvider";
-import { mangePlayList, user_data_mangment } from "@/app/api/movies/server";
+import { mangePlayList, user_data_mangment } from "@/app/api/server";
 import HeartFill from "../icons/heart-fill";
 
 interface HeroData {

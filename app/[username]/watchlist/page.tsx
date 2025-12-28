@@ -5,7 +5,7 @@ import { FilterSec } from "@/app/components/watchlist/filterSec"
 import MovieCard2 from "@/app/components/cards/movie-card2"
 import styles from "./watchlist.module.css"
 import { useEffect, useState } from "react"
-import { mangePlayList } from "@/app/api/movies/server"
+import { mangePlayList } from "@/app/api/server"
 import { useSessionStatus } from "@/app/hooks/session-status"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -15,7 +15,7 @@ import Sidebar from "@/app/components/home-page/sidebar";
 export default function Page() {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(true);
-  const [error, serError] = useState("");
+  const [error, setError] = useState("");
   const [filter, setFilter] = useState("all");
   const [sorting, setSorting] = useState("Recently Added")
 
@@ -39,10 +39,7 @@ export default function Page() {
 
     if (sessionStatus === "authenticated") {
       fetchData();
-    } else if (sessionStatus === "unauthenticated") {
-      router.push('/login');
-      setIsLoading(false)
-    }
+    } 
 
   }, [sessionStatus])
 

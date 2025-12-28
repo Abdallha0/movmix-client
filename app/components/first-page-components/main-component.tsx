@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState } from "react";
-import { trending } from "@/app/api/movies/tmdb"
+import { trending } from "@/app/api/tmdb"
 
 interface Pages {
     status: boolean,

@@ -1,0 +1,198 @@
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #141414;
+  --card-border: #262626;
+  --primary: var(--brand-color);
+  --primary-hover: #f40612;
+  --secondary: #2f2f2f;
+  --muted: #808080;
+  --accent: #e50914;
+  --radius: 8px;
+  --font-sans: "Geist", sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
+
+/* Content Area */
+.content {
+  flex-grow: 1;
+}
+
+.section {
+  margin-bottom: 48px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.sectionHeader {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.sectionDescription {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Card Styling */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sublabel {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Controls */
+.button {
+  background: var(--secondary);
+  color: var(--foreground);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.primaryButton {
+  background: var(--primary);
+}
+
+.dangerButton {
+  background: transparent;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+}
+
+.dangerButton:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* Added styles for select dropdowns to match theme */
+.select {
+  background: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--primary);
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

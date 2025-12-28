@@ -5,7 +5,7 @@ import { LikedMovies } from "./likedMovies"
 import { RecentReveiws } from "./rescentReviews"
 import { RecentActivity } from "./recentActivity"
 import { useEffect, useState } from "react"
-import { getProfile } from "@/app/api/movies/server"
+import { getProfile } from "@/app/api/server"
 
 function Content() {
     const [isLoading, setIsLoading] = useState(true);

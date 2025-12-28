@@ -104,6 +104,7 @@
 
 .starEmpty {
   color: var(--muted);
+  stroke: gold;
 }
 
 .ratingDisplay {

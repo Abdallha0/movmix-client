@@ -5,7 +5,7 @@ import { CastSection } from "@/app/components/stream-page/cast-section";
 import { ReviewsSection } from "@/app/components/stream-page/reviews-section";
 import { SimilarMovies } from "@/app/components/stream-page/similar-movies";
 import { useEffect, useState } from "react";
-import { getStreamData } from "@/app/api/movies/server";
+import { getStreamData } from "@/app/api/server";
 import { useParams } from "next/navigation";
 import { useToast } from "@/app/providers/toastProvider";
 import styles from "./page.module.css";
@@ -20,7 +20,8 @@ function Page() {
     const [data, setData] = useState<any>({});
     const [userData, setUserData] = useState<any>({});
     const { showToast } = useToast();
-    const [showVedio, setShowVedio] = useState({ call: false })
+    const [showVedio, setShowVedio] = useState({ call: false });
+    const [communityReveiws, setCommunityReveiews] = useState({length: 0, reveiws: []});
 
     useEffect(() => {
         if (!id) {
@@ -44,11 +45,16 @@ function Page() {
 
             setData(res.data);
             setUserData(res.user)
+            setCommunityReveiews({ length: res.reviewsLength, reveiws: res.reviews})
             setIsLoading(false)
         }
 
         fetchData();
     }, [id])
+
+    // get more reviews from server
+
+    //...
 
     if (isLoading) return <div className="loader"></div>
     if (error) return <div className="layout center-page">
@@ -79,7 +85,7 @@ function Page() {
                     votes={data.votes}
                 />
                 <CastSection casts={data.casts} />
-                <ReviewsSection id={data.tmdb} />
+                <ReviewsSection id={data.tmdb} title={data.title} rating={userData.rating || 0} reviewsMaxLength={communityReveiws.length} communityReveiws={communityReveiws.reveiws || []}/>
                 <SimilarMovies id={data.tmdb} genre={data.genre[0]} />
             </div>
             <Sidebar />

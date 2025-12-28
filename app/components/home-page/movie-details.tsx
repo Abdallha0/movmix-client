@@ -2,7 +2,7 @@
 import PlayFill from "../icons/play-fill"
 import styles from "./css/hero.module.css"
 import StarFill from "../icons/star-fill"
-import { getMovieTrailer } from "@/app/api/movies/movies-api-utils";
+import { getMovieTrailer } from "@/app/api/movies-api-utils";
 import { useToast } from "@/app/providers/toastProvider";
 import Link from "next/link";
 

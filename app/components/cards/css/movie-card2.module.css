@@ -248,7 +248,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 3;
+    z-index: 999;
 }
 
 .movie_card:hover .quick_remove {

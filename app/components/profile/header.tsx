@@ -2,8 +2,8 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./css/header.module.css"
 import { useToast } from "@/app/providers/toastProvider";
-import { UploadImg } from "@/app/api/movies/server";
-
+import { UploadImg } from "@/app/api/server";
+import { setImage } from "@/app/utils/cookieUtils"
 interface Data {
   data: {
     email: string;
@@ -47,6 +47,7 @@ setSaveBtn(data.image === preview)
     }
 
 setSaveBtn(true)
+setImage(res.photo)
   }
 
 

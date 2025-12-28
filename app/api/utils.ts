@@ -1,3 +1,12 @@
+import { getToken } from "../utils/cookieUtils"
+
+export const url = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SERVER_URL : process.env.NEXT_PUBLIC_LOCALHOST_URL
+
+export var headers = {
+    "Content-Type": "application/json",
+    Authorization: getToken() || ""
+}
+
 export const allGenres = {
     Action: {
         "id": 28,

@@ -10,7 +10,7 @@ import Sidebar from "./sidebar";
 import styles from "./css/hero.module.css"
 import MovieGrid from "./movie-grid";
 import Vedio from "../vedio";
-import { nowPlay } from "@/app/api/movies/tmdb";
+import { nowPlay } from "@/app/api/tmdb";
 import { useSession } from "next-auth/react";
 import { getUserName, setToken, getToken, getImage } from "@/app/utils/cookieUtils";
 import { useEffect, useState } from "react"
@@ -86,8 +86,8 @@ function Home() {
 
   if (sessionStatus === "loading" || isLoading) return <div className="loader"></div>
 
-  let name = user?.name as string || getUserName() as string || "unknown";
-  let photo = user?.image as string || getImage() as string || "/profile.png"
+  let name = getUserName() as string || user?.name as string ||  "unknown";
+  let photo = getImage() as string || user?.image as string ||  "/profile.png"
   return (
     <div className="home-page">
       <Header name={sessionStatus === "authenticated" ? name : "GUEST"} photo={sessionStatus === "authenticated" ? photo : ""} />
